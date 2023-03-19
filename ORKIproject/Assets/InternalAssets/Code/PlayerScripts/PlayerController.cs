@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         
         if ((Physics.Raycast(rayForward, out hit, 2.1f))) 
         {
-
+            Debug.Log("Стена вперди");
             return false;
         }
         else
@@ -89,24 +89,18 @@ public class PlayerController : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     void MovePlayer()
     {
-        if (true)
-        {
-            prevTargetGridPos = targetGridPos;
 
-            Vector3 targetPosition = targetGridPos;
-            if (targetRotation.y > 270f && targetRotation.y < 361f) targetRotation.y = 0f; //Не дает возможности повернуть за 360 градусов
-            if (targetRotation.y < 0f) targetRotation.y = 270f; // Не дает повернуть в отрицательные значения
+        prevTargetGridPos = targetGridPos;
 
-            transform.position =
-                Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
+        Vector3 targetPosition = targetGridPos;
+        if (targetRotation.y > 270f && targetRotation.y < 361f) targetRotation.y = 0f; //Не дает возможности повернуть за 360 градусов
+        if (targetRotation.y < 0f) targetRotation.y = 270f; // Не дает повернуть в отрицательные значения
 
-        }
-        else
-        {
-            targetGridPos = prevTargetGridPos;
-            Debug.Log("НИРАБОТАЕТ");
-        }
+        transform.position =
+            Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * transitionSpeed);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(targetRotation), Time.deltaTime * transitionRotationSpeed);
+
+
     }
 
     public void RotateLeft()
